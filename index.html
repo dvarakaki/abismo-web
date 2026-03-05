@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABISMO — Histórias do Além</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js" defer></script>
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ===================== CURSOR CUSTOM ===================== -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ===================== CANVAS PARTICLES ===================== -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- ===================== NOISE OVERLAY ===================== -->
+  <div class="noise-overlay"></div>
+
+  <!-- ===================== VIGNETTE ===================== -->
+  <div class="vignette"></div>
+
+  <!-- ===================== HEADER / NAV ===================== -->
+  <header id="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <button id="menu-toggle" class="icon-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <a href="../index.html" class="logo" aria-label="ABISMO Home">
+        <span class="logo-title">ABISMO</span>
+        <span class="logo-sub">histórias do além</span>
+      </a>
+
+      <nav class="header-right">
+        <a href="#stories" class="nav-link">Histórias</a>
+        <a href="#categories" class="nav-link">Categorias</a>
+        <a href="#submit" class="nav-link">Publicar</a>
+        <a href="/html/login.html" class="nav-link nav-cta">Entrar</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== MOBILE MENU ===================== -->
+  <div id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <nav>
+        <a href="#stories" class="mobile-nav-link">Histórias</a>
+        <a href="#categories" class="mobile-nav-link">Categorias</a>
+        <a href="#submit" class="mobile-nav-link">Publicar</a>
+        <a href="../html/login.html" class="mobile-nav-link">Entrar</a>
+        <a href="../html/register.html" class="mobile-nav-link">Criar conta</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <p class="im-fell">"O que os olhos não veem,<br/>a mente não esquece."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-fog fog-1"></div>
+      <div class="hero-fog fog-2"></div>
+      <div class="hero-fog fog-3"></div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">— bem-vindo ao abismo —</p>
+      <h1 class="hero-title" id="hero-title">
+        <span class="ht-line">Onde o</span>
+        <span class="ht-line ht-accent">Medo</span>
+        <span class="ht-line">Encontra</span>
+        <span class="ht-line ht-accent">Palavras</span>
+      </h1>
+      <p class="hero-desc">
+        Um repositório de horrores cuidadosamente cultivados.<br/>
+        Histórias que não pedem permissão para entrar na sua mente.
+      </p>
+      <div class="hero-actions">
+        <a href="#stories" class="btn btn-primary">
+          <i class="fa-solid fa-book-skull"></i> Mergulhar
+        </a>
+        <a href="#submit" class="btn btn-ghost">
+          <i class="fa-solid fa-feather-pointed"></i> Publicar história
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num" data-target="2847">0</span>
+          <span class="stat-label">Histórias</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="14320">0</span>
+          <span class="stat-label">Leitores</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="389">0</span>
+          <span class="stat-label">Autores</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span class="scroll-line"></span>
+      <span class="scroll-text">Role para baixo</span>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURED STORY ===================== -->
+  <section id="featured">
+    <div class="section-label">
+      <span class="sl-line"></span>
+      <span class="sl-text">História em Destaque</span>
+      <span class="sl-line"></span>
+    </div>
+
+    <article class="featured-card" id="featured-story">
+      <div class="featured-image-wrap">
+        <div class="featured-image" style="background-image: url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=1200&q=80')"></div>
+        <div class="featured-image-overlay"></div>
+        <span class="featured-badge">
+          <i class="fa-solid fa-fire-flame-curved"></i> Em destaque
+        </span>
+      </div>
+      <div class="featured-content">
+        <div class="story-meta">
+          <span class="category-tag">Sobrenatural</span>
+          <span class="meta-dot">·</span>
+          <span class="read-time"><i class="fa-regular fa-clock"></i> 12 min de leitura</span>
+          <span class="meta-dot">·</span>
+          <time class="story-date">15 Fev, 2025</time>
+        </div>
+        <h2 class="featured-title">A Casa do Fim da Estrada</h2>
+        <p class="featured-excerpt im-fell">
+          Ninguém na cidade sabia há quanto tempo a casa estava lá. Ela simplesmente existia,
+          como uma ferida que se recusa a fechar — mais escura que as noites sem lua,
+          mais fria que o vento de agosto que varria o Vale dos Pinheiros...
+        </p>
+        <div class="featured-footer">
+          <div class="author-chip">
+            <div class="author-avatar">MR</div>
+            <span class="author-name">Marcos Rezende</span>
+          </div>
+          <div class="story-actions">
+            <button class="icon-action" aria-label="Curtir">
+              <i class="fa-regular fa-heart"></i>
+              <span>847</span>
+            </button>
+            <button class="icon-action" aria-label="Comentários">
+              <i class="fa-regular fa-comment"></i>
+              <span>134</span>
+            </button>
+            <a href="story.html" class="btn btn-primary btn-sm">
+              Ler agora <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ===================== CATEGORIES ===================== -->
+  <section id="categories">
+    <div class="section-label">
+      <span class="sl-line"></span>
+      <span class="sl-text">Categorias</span>
+      <span class="sl-line"></span>
+    </div>
+    <div class="categories-grid">
+      <a href="category.html?cat=sobrenatural" class="cat-card cat-1">
+        <i class="fa-solid fa-ghost"></i>
+        <span class="cat-name">Sobrenatural</span>
+        <span class="cat-count">482 histórias</span>
+      </a>
+      <a href="category.html?cat=psicologico" class="cat-card cat-2">
+        <i class="fa-solid fa-brain"></i>
+        <span class="cat-name">Psicológico</span>
+        <span class="cat-count">317 histórias</span>
+      </a>
+      <a href="category.html?cat=slasher" class="cat-card cat-3">
+        <i class="fa-solid fa-scissors"></i>
+        <span class="cat-name">Slasher</span>
+        <span class="cat-count">205 histórias</span>
+      </a>
+      <a href="category.html?cat=creepypasta" class="cat-card cat-4">
+        <i class="fa-brands fa-internet-explorer"></i>
+        <span class="cat-name">Creepypasta</span>
+        <span class="cat-count">634 histórias</span>
+      </a>
+      <a href="category.html?cat=cosmico" class="cat-card cat-5">
+        <i class="fa-solid fa-star-of-life"></i>
+        <span class="cat-name">Cósmico</span>
+        <span class="cat-count">198 histórias</span>
+      </a>
+      <a href="category.html?cat=folclore" class="cat-card cat-6">
+        <i class="fa-solid fa-tree"></i>
+        <span class="cat-name">Folclore</span>
+        <span class="cat-count">411 histórias</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== STORIES GRID ===================== -->
+  <section id="stories">
+    <div class="stories-header">
+      <div class="section-label">
+        <span class="sl-line"></span>
+        <span class="sl-text">Histórias Recentes</span>
+        <span class="sl-line"></span>
+      </div>
+      <div class="stories-filters">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="recentes">Recentes</button>
+        <button class="filter-btn" data-filter="populares">Populares</button>
+        <button class="filter-btn" data-filter="curtas">Curtas</button>
+      </div>
+    </div>
+
+    <div class="stories-grid" id="stories-grid">
+
+      <!-- Story Card 1 -->
+      <article class="story-card" data-category="sobrenatural">
+        <a href="story.html" class="story-card-link">
+          <div class="story-card-img-wrap">
+            <div class="story-card-img" style="background-image: url('https://images.unsplash.com/photo-1601513445506-2ab0d4fb4229?w=600&q=80')"></div>
+            <span class="story-card-cat">Sobrenatural</span>
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span><i class="fa-regular fa-clock"></i> 8 min</span>
+              <span><i class="fa-regular fa-heart"></i> 423</span>
+            </div>
+            <h3 class="story-card-title">O Espelho do Corredor</h3>
+            <p class="story-card-excerpt im-fell">
+              Ela percebeu tarde demais que o reflexo havia parado de imitar seus movimentos há três dias...
+            </p>
+            <div class="story-card-author">
+              <div class="author-avatar-sm">AL</div>
+              <span>Ana Lima</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Story Card 2 -->
+      <article class="story-card" data-category="psicologico">
+        <a href="story.html" class="story-card-link">
+          <div class="story-card-img-wrap">
+            <div class="story-card-img" style="background-image: url('https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=600&q=80')"></div>
+            <span class="story-card-cat">Psicológico</span>
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span><i class="fa-regular fa-clock"></i> 15 min</span>
+              <span><i class="fa-regular fa-heart"></i> 781</span>
+            </div>
+            <h3 class="story-card-title">Seis Dias Sem Dormir</h3>
+            <p class="story-card-excerpt im-fell">
+              No quarto dia, comecei a ver a coisa nos cantos do quarto. No sexto, percebi que ela era eu...
+            </p>
+            <div class="story-card-author">
+              <div class="author-avatar-sm">PT</div>
+              <span>Pedro Torres</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Story Card 3 -->
+      <article class="story-card story-card--featured" data-category="folclore">
+        <a href="story.html" class="story-card-link">
+          <div class="story-card-img-wrap">
+            <div class="story-card-img" style="background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&q=80')"></div>
+            <span class="story-card-cat">Folclore</span>
+            <span class="story-card-badge"><i class="fa-solid fa-skull"></i> Mais lida</span>
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span><i class="fa-regular fa-clock"></i> 22 min</span>
+              <span><i class="fa-regular fa-heart"></i> 2.1k</span>
+            </div>
+            <h3 class="story-card-title">A Mula-Sem-Cabeça do Km 47</h3>
+            <p class="story-card-excerpt im-fell">
+              Meu avô sempre disse para nunca parar o carro naquela curva depois da meia-noite. Eu não acreditei nele...
+            </p>
+            <div class="story-card-author">
+              <div class="author-avatar-sm">CF</div>
+              <span>Carla Ferreira</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Story Card 4 -->
+      <article class="story-card" data-category="creepypasta">
+        <a href="story.html" class="story-card-link">
+          <div class="story-card-img-wrap">
+            <div class="story-card-img" style="background-image: url('https://images.unsplash.com/photo-1547721064-da6cfb341d50?w=600&q=80')"></div>
+            <span class="story-card-cat">Creepypasta</span>
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span><i class="fa-regular fa-clock"></i> 6 min</span>
+              <span><i class="fa-regular fa-heart"></i> 556</span>
+            </div>
+            <h3 class="story-card-title">O Arquivo .exe</h3>
+            <p class="story-card-excerpt im-fell">
+              O arquivo chegou sem remetente. O ícone era uma foto minha dormindo, tirada na noite anterior...
+            </p>
+            <div class="story-card-author">
+              <div class="author-avatar-sm">RB</div>
+              <span>Rafael Braga</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Story Card 5 -->
+      <article class="story-card" data-category="cosmico">
+        <a href="story.html" class="story-card-link">
+          <div class="story-card-img-wrap">
+            <div class="story-card-img" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&q=80')"></div>
+            <span class="story-card-cat">Cósmico</span>
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span><i class="fa-regular fa-clock"></i> 18 min</span>
+              <span><i class="fa-regular fa-heart"></i> 934</span>
+            </div>
+            <h3 class="story-card-title">O Que Veio das Estrelas</h3>
+            <p class="story-card-excerpt im-fell">
+              O telescópio captou algo entre as galáxias. Não era uma estrela. Não era nuvem de gás. E estava se aproximando...
+            </p>
+            <div class="story-card-author">
+              <div class="author-avatar-sm">JS</div>
+              <span>Julia Souza</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Story Card 6 -->
+      <article class="story-card" data-category="slasher">
+        <a href="story.html" class="story-card-link">
+          <div class="story-card-img-wrap">
+            <div class="story-card-img" style="background-image: url('https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80')"></div>
+            <span class="story-card-cat">Slasher</span>
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span><i class="fa-regular fa-clock"></i> 11 min</span>
+              <span><i class="fa-regular fa-heart"></i> 312</span>
+            </div>
+            <h3 class="story-card-title">A Cabana do Lago Negro</h3>
+            <p class="story-card-excerpt im-fell">
+              Éramos cinco quando chegamos. Cada um tinha sua teoria sobre os ossos encontrados no porão...
+            </p>
+            <div class="story-card-author">
+              <div class="author-avatar-sm">DM</div>
+              <span>Diego Matos</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+    </div>
+
+    <div class="load-more-wrap">
+      <button class="btn btn-ghost" id="load-more">
+        <i class="fa-solid fa-skull-crossbones"></i> Carregar mais histórias
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================== QUOTE INTERLUDE ===================== -->
+  <section id="quote-interlude">
+    <div class="quote-content">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <blockquote class="quote-text im-fell">
+        "O medo é a reação mais antiga e mais forte da humanidade,<br />
+        e o medo mais antigo e mais forte é o medo do desconhecido."
+      </blockquote>
+      <cite class="quote-author">— H.P. Lovecraft</cite>
+    </div>
+  </section>
+
+  <!-- ===================== SUBMIT SECTION ===================== -->
+  <section id="submit">
+    <div class="submit-inner">
+      <div class="submit-text">
+        <div class="section-label justify-start">
+          <span class="sl-line" style="width:40px"></span>
+          <span class="sl-text">Sua vez</span>
+        </div>
+        <h2 class="submit-title">Você tem uma<br/><em>história para contar?</em></h2>
+        <p class="submit-desc">
+          O ABISMO está sempre faminto por novas histórias. Publique a sua e deixe
+          que o medo que vive dentro de você encontre outros corações dispostos a
+          senti-lo.
+        </p>
+        <ul class="submit-features">
+          <li><i class="fa-solid fa-check"></i> Publicação gratuita</li>
+          <li><i class="fa-solid fa-check"></i> Editor rico com formatação</li>
+          <li><i class="fa-solid fa-check"></i> Alcance milhares de leitores</li>
+          <li><i class="fa-solid fa-check"></i> Perfil de autor personalizado</li>
+        </ul>
+        <div class="submit-actions">
+          <a href="../html/register.html" class="btn btn-primary">
+            <i class="fa-solid fa-feather-pointed"></i> Começar a escrever
+          </a>
+          <a href="../html/guidelines.html" class="btn btn-ghost btn-sm">
+            Ver diretrizes <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="submit-visual">
+        <div class="submit-card-mockup">
+          <div class="mockup-header">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-title-bar"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line short"></div>
+            <div class="mockup-spacer"></div>
+            <div class="mockup-para">
+              <div class="mockup-line"></div>
+              <div class="mockup-line"></div>
+              <div class="mockup-line short"></div>
+            </div>
+            <div class="mockup-cursor blink"></div>
+          </div>
+        </div>
+        <div class="submit-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NEWSLETTER ===================== -->
+  <section id="newsletter">
+    <div class="newsletter-inner">
+      <i class="fa-solid fa-envelope-open-text newsletter-icon"></i>
+      <div class="newsletter-text">
+        <h3>O Abismo também te escreve</h3>
+        <p>Receba as histórias mais perturbadoras da semana diretamente na sua caixa de entrada.</p>
+      </div>
+      <form class="newsletter-form" id="newsletter-form" action="#" method="POST">
+        <input type="email" name="email" placeholder="seu@email.com" required class="newsletter-input" />
+        <button type="submit" class="btn btn-primary">
+          Assinar <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-title">ABISMO</span>
+        <span class="logo-sub">histórias do além</span>
+        <p class="footer-tagline im-fell">
+          "Nem toda escuridão precisa ser temida.<br/>Algumas precisam ser lidas."
+        </p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Navegar</h4>
+          <a href="#stories">Histórias</a>
+          <a href="#categories">Categorias</a>
+          <a href="ranking.html">Ranking</a>
+          <a href="authors.html">Autores</a>
+        </div>
+        <div class="footer-col">
+          <h4>Conta</h4>
+          <a href="login.html">Entrar</a>
+          <a href="register.html">Registrar</a>
+          <a href="submit.html">Publicar</a>
+          <a href="profile.html">Meu perfil</a>
+        </div>
+        <div class="footer-col">
+          <h4>ABISMO</h4>
+          <a href="about.html">Sobre</a>
+          <a href="guidelines.html">Diretrizes</a>
+          <a href="privacy.html">Privacidade</a>
+          <a href="contact.html">Contato</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 ABISMO. Todos os direitos reservados.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== BACK TO TOP ===================== -->
+  <button id="back-to-top" aria-label="Voltar ao topo">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script src="../js/script.js" defer></script>
+</body>
+</html>

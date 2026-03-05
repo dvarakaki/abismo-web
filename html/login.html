@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar — ABISMO</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/auth.css" />
+</head>
+<body class="auth-page">
+
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <canvas id="particles-canvas"></canvas>
+  <div class="noise-overlay"></div>
+  <div class="vignette"></div>
+
+  <!-- ===================== HEADER MINIMAL ===================== -->
+  <header id="site-header" class="scrolled">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="../index.html" class="back-link">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Voltar</span>
+        </a>
+      </div>
+      <a href="../index.html" class="logo">
+        <span class="logo-title">ABISMO</span>
+        <span class="logo-sub">histórias do além</span>
+      </a>
+      <div class="header-right" style="width:100px"></div>
+    </div>
+  </header>
+
+  <!-- ===================== AUTH LAYOUT ===================== -->
+  <main class="auth-main">
+
+    <!-- LEFT — Decorative Panel -->
+    <aside class="auth-panel" aria-hidden="true">
+      <div class="auth-panel-bg"></div>
+      <div class="auth-panel-fog fog-1"></div>
+      <div class="auth-panel-fog fog-2"></div>
+      <div class="auth-panel-content">
+        <div class="panel-ornament">
+          <i class="fa-solid fa-skull"></i>
+        </div>
+        <blockquote class="panel-quote im-fell">
+          "Quem entra no abismo<br/>nunca sai ileso."
+        </blockquote>
+        <div class="panel-stories">
+          <p class="panel-stories-label">Em destaque agora</p>
+          <div class="panel-story-chip">
+            <div class="psc-img" style="background-image:url('https://images.unsplash.com/photo-1601513445506-2ab0d4fb4229?w=120&q=80')"></div>
+            <div class="psc-info">
+              <span class="psc-title">O Espelho do Corredor</span>
+              <span class="psc-meta"><i class="fa-regular fa-heart"></i> 423 · 8 min</span>
+            </div>
+          </div>
+          <div class="panel-story-chip">
+            <div class="psc-img" style="background-image:url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=120&q=80')"></div>
+            <div class="psc-info">
+              <span class="psc-title">A Mula-Sem-Cabeça do Km 47</span>
+              <span class="psc-meta"><i class="fa-regular fa-heart"></i> 2.1k · 22 min</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel-stat-row">
+          <div class="panel-stat">
+            <span class="ps-num">2.8k</span>
+            <span class="ps-lbl">Histórias</span>
+          </div>
+          <div class="panel-stat">
+            <span class="ps-num">14k</span>
+            <span class="ps-lbl">Leitores</span>
+          </div>
+          <div class="panel-stat">
+            <span class="ps-num">389</span>
+            <span class="ps-lbl">Autores</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT — Form Panel -->
+    <section class="auth-form-section">
+      <div class="auth-form-wrap">
+
+        <div class="auth-header">
+          <div class="auth-icon-wrap">
+            <i class="fa-solid fa-door-open"></i>
+          </div>
+          <h1 class="auth-title">Bem-vindo de volta</h1>
+          <p class="auth-subtitle im-fell">
+            O abismo sentiu sua falta. Entre e continue lendo.
+          </p>
+        </div>
+
+        <!-- Social Login -->
+        <div class="social-login">
+          <button type="button" class="social-btn" id="btn-google">
+            <i class="fa-brands fa-google"></i>
+            <span>Entrar com Google</span>
+          </button>
+          <button type="button" class="social-btn" id="btn-github">
+            <i class="fa-brands fa-github"></i>
+            <span>Entrar com GitHub</span>
+          </button>
+        </div>
+
+        <div class="auth-divider">
+          <span class="ad-line"></span>
+          <span class="ad-text">ou use seu email</span>
+          <span class="ad-line"></span>
+        </div>
+
+        <!-- Login Form -->
+        <form class="auth-form" id="login-form" action="/login" method="POST" novalidate>
+
+          <!-- CSRF token placeholder -->
+          <!-- <input type="hidden" name="_csrf" value="${csrfToken}" /> -->
+
+          <div class="field-group">
+            <label class="field-label" for="email">E-mail</label>
+            <div class="field-input-wrap">
+              <i class="fa-regular fa-envelope field-icon"></i>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="field-input"
+                placeholder="seu@email.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <span class="field-error" id="email-error" role="alert"></span>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label-row">
+              <label class="field-label" for="password">Senha</label>
+              <a href="forgot-password.html" class="field-link">Esqueci minha senha</a>
+            </div>
+            <div class="field-input-wrap">
+              <i class="fa-solid fa-lock field-icon"></i>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="field-input"
+                placeholder="••••••••"
+                autocomplete="current-password"
+                required
+                minlength="6"
+              />
+              <button type="button" class="field-toggle-pw" aria-label="Mostrar senha" tabindex="-1">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <span class="field-error" id="password-error" role="alert"></span>
+          </div>
+
+          <div class="field-row">
+            <label class="checkbox-label">
+              <input type="checkbox" name="remember" id="remember" class="checkbox-input" />
+              <span class="checkbox-custom"></span>
+              <span class="checkbox-text">Lembrar de mim</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full" id="login-submit">
+            <span class="btn-text">Entrar no Abismo</span>
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span class="btn-loader" aria-hidden="true">
+              <i class="fa-solid fa-circle-notch fa-spin"></i>
+            </span>
+          </button>
+
+          <!-- Server-side error placeholder -->
+          <div class="form-server-error" id="server-error" role="alert" aria-live="polite"></div>
+
+        </form>
+
+        <p class="auth-switch">
+          Ainda não tem conta?
+          <a href="../html/register.html" class="auth-switch-link">Criar conta grátis</a>
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../js/login.js" defer></script>
+  <script src="../js/auth.js" defer></script>
+</body>
+</html>

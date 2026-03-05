@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Criar Conta — ABISMO</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/auth.css" />
+  </head>
+  <body class="auth-page">
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+    <canvas id="particles-canvas"></canvas>
+    <div class="noise-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- ===================== HEADER MINIMAL ===================== -->
+    <header id="site-header" class="scrolled">
+      <div class="header-inner">
+        <div class="header-left">
+          <a href="../index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Voltar</span>
+          </a>
+        </div>
+        <a href="../index.html" class="logo">
+          <span class="logo-title">ABISMO</span>
+          <span class="logo-sub">histórias do além</span>
+        </a>
+        <div class="header-right" style="width: 100px"></div>
+      </div>
+    </header>
+
+    <!-- ===================== AUTH LAYOUT ===================== -->
+    <main class="auth-main">
+      <!-- LEFT — Decorative Panel -->
+      <aside class="auth-panel" aria-hidden="true">
+        <div class="auth-panel-bg"></div>
+        <div class="auth-panel-fog fog-1"></div>
+        <div class="auth-panel-fog fog-2"></div>
+        <div class="auth-panel-content">
+          <div class="panel-ornament">
+            <i class="fa-solid fa-feather-pointed"></i>
+          </div>
+          <blockquote class="panel-quote im-fell">
+            "Toda grande história<br />começa com coragem<br />de contá-la."
+          </blockquote>
+          <div class="panel-perks">
+            <div class="perk-item">
+              <div class="perk-icon"><i class="fa-solid fa-book-open"></i></div>
+              <div class="perk-text">
+                <span class="perk-title">Publicação ilimitada</span>
+                <span class="perk-desc"
+                  >Publique quantas histórias quiser, gratuitamente</span
+                >
+              </div>
+            </div>
+            <div class="perk-item">
+              <div class="perk-icon"><i class="fa-solid fa-users"></i></div>
+              <div class="perk-text">
+                <span class="perk-title">Comunidade viva</span>
+                <span class="perk-desc"
+                  >Conecte-se com leitores e outros escritores</span
+                >
+              </div>
+            </div>
+            <div class="perk-item">
+              <div class="perk-icon">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <div class="perk-text">
+                <span class="perk-title">Analytics do autor</span>
+                <span class="perk-desc"
+                  >Acompanhe visualizações, curtidas e comentários</span
+                >
+              </div>
+            </div>
+            <div class="perk-item">
+              <div class="perk-icon"><i class="fa-solid fa-star"></i></div>
+              <div class="perk-text">
+                <span class="perk-title">Perfil de destaque</span>
+                <span class="perk-desc">Seja reconhecido na comunidade</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT — Form Panel -->
+      <section class="auth-form-section">
+        <div class="auth-form-wrap">
+          <div class="auth-header">
+            <div class="auth-icon-wrap">
+              <i class="fa-solid fa-skull-crossbones"></i>
+            </div>
+            <h1 class="auth-title">Junte-se ao Abismo</h1>
+            <p class="auth-subtitle im-fell">
+              Crie sua conta e comece a assombrar leitores com suas histórias.
+            </p>
+          </div>
+
+          <!-- Social Login -->
+          <div class="social-login">
+            <button type="button" class="social-btn" id="btn-google">
+              <i class="fa-brands fa-google"></i>
+              <span>Registrar com Google</span>
+            </button>
+            <button type="button" class="social-btn" id="btn-github">
+              <i class="fa-brands fa-github"></i>
+              <span>Registrar com GitHub</span>
+            </button>
+          </div>
+
+          <div class="auth-divider">
+            <span class="ad-line"></span>
+            <span class="ad-text">ou preencha os dados</span>
+            <span class="ad-line"></span>
+          </div>
+
+          <!-- Register Form -->
+          <form
+            class="auth-form"
+            id="register-form"
+            action="/register"
+            method="POST"
+            novalidate
+          >
+            <!-- CSRF token placeholder -->
+            <!-- <input type="hidden" name="_csrf" value="${csrfToken}" /> -->
+
+            <div class="field-row-2">
+              <div class="field-group">
+                <label class="field-label" for="firstName">Nome</label>
+                <div class="field-input-wrap">
+                  <i class="fa-regular fa-user field-icon"></i>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    class="field-input"
+                    placeholder="Seu nome"
+                    autocomplete="given-name"
+                    required
+                    minlength="2"
+                  />
+                </div>
+                <span
+                  class="field-error"
+                  id="firstName-error"
+                  role="alert"
+                ></span>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="lastName">Sobrenome</label>
+                <div class="field-input-wrap">
+                  <i class="fa-regular fa-user field-icon"></i>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    class="field-input"
+                    placeholder="Seu sobrenome"
+                    autocomplete="family-name"
+                    required
+                    minlength="2"
+                  />
+                </div>
+                <span
+                  class="field-error"
+                  id="lastName-error"
+                  role="alert"
+                ></span>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="username">
+                Nome de usuário
+                <span class="field-hint">Será exibido publicamente</span>
+              </label>
+              <div class="field-input-wrap">
+                <span class="field-prefix">@</span>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  class="field-input field-input--prefixed"
+                  placeholder="seu_usuario"
+                  autocomplete="username"
+                  required
+                  minlength="3"
+                  maxlength="30"
+                  pattern="^[a-zA-Z0-9_]+$"
+                />
+                <span
+                  class="field-status"
+                  id="username-status"
+                  aria-live="polite"
+                ></span>
+              </div>
+              <span class="field-error" id="username-error" role="alert"></span>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="reg-email">E-mail</label>
+              <div class="field-input-wrap">
+                <i class="fa-regular fa-envelope field-icon"></i>
+                <input
+                  type="email"
+                  id="reg-email"
+                  name="email"
+                  class="field-input"
+                  placeholder="seu@email.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <span
+                class="field-error"
+                id="reg-email-error"
+                role="alert"
+              ></span>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="reg-password">
+                Senha
+                <span class="field-hint">Mínimo 8 caracteres</span>
+              </label>
+              <div class="field-input-wrap">
+                <i class="fa-solid fa-lock field-icon"></i>
+                <input
+                  type="password"
+                  id="reg-password"
+                  name="password"
+                  class="field-input"
+                  placeholder="••••••••"
+                  autocomplete="new-password"
+                  required
+                  minlength="8"
+                />
+                <button
+                  type="button"
+                  class="field-toggle-pw"
+                  aria-label="Mostrar senha"
+                  tabindex="-1"
+                >
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+              <!-- Password Strength Bar -->
+              <div class="pw-strength" id="pw-strength" aria-live="polite">
+                <div class="pw-strength-bar">
+                  <span class="pw-strength-fill" id="pw-strength-fill"></span>
+                </div>
+                <span class="pw-strength-label" id="pw-strength-label"></span>
+              </div>
+              <span
+                class="field-error"
+                id="reg-password-error"
+                role="alert"
+              ></span>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="confirm-password"
+                >Confirmar senha</label
+              >
+              <div class="field-input-wrap">
+                <i class="fa-solid fa-lock field-icon"></i>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  name="confirmPassword"
+                  class="field-input"
+                  placeholder="••••••••"
+                  autocomplete="new-password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="field-toggle-pw"
+                  aria-label="Mostrar confirmação"
+                  tabindex="-1"
+                >
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+              <span
+                class="field-error"
+                id="confirm-password-error"
+                role="alert"
+              ></span>
+            </div>
+
+            <div class="field-row">
+              <label class="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="terms"
+                  id="terms"
+                  class="checkbox-input"
+                  required
+                />
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-text">
+                  Concordo com os
+                  <a href="terms.html" class="field-link" target="_blank"
+                    >Termos de Uso</a
+                  >
+                  e a
+                  <a href="privacy.html" class="field-link" target="_blank"
+                    >Política de Privacidade</a
+                  >
+                </span>
+              </label>
+              <span class="field-error" id="terms-error" role="alert"></span>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary btn-full"
+              id="register-submit"
+            >
+              <span class="btn-text">Criar minha conta</span>
+              <i class="fa-solid fa-skull-crossbones"></i>
+              <span class="btn-loader" aria-hidden="true">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+              </span>
+            </button>
+
+            <!-- Server-side error placeholder -->
+            <div
+              class="form-server-error"
+              id="server-error"
+              role="alert"
+              aria-live="polite"
+            ></div>
+          </form>
+
+          <p class="auth-switch">
+            Já tem uma conta?
+            <a href="../html/login.html" class="auth-switch-link"
+              >Entrar agora</a
+            >
+          </p>
+        </div>
+      </section>
+    </main>
+    <script src="../js/login.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+  </body>
+</html>
